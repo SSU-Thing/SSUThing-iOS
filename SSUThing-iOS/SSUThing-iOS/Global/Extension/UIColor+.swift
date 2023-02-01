@@ -12,6 +12,7 @@ import SnapKit
 
 enum CustomColor {
     case maingreen
+    case mainbackgroundcolor
 }
 
 extension UIColor {
@@ -20,6 +21,9 @@ extension UIColor {
             switch color {
             case .maingreen:
                 return UIColor(red: 0.41, green: 0.80, blue: 0.76, alpha: 1.00)
+            
+            case .mainbackgroundcolor:
+                return UIColor(red: 0.97, green: 0.98, blue: 0.96, alpha: 1.00)
             }
         }
 }
