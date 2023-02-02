@@ -18,7 +18,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor.customColor(.mainbackgroundcolor)
         mainTabBar()
         
     }
@@ -50,7 +50,7 @@ class TabBarController: UITabBarController {
         
         guard let items = self.tabBar.items else {return}
         
-        let images = [ "house", "magnifyingglass", "exclamationmark.square" ]
+        let images = [ "house.fill", "doc.text.fill", "person.fill" ]
 //      mylistVC.tabBarItem.image = UIImage(systemName: "clock.arrow.circlepath")
         
         for x in 0...2 {
@@ -69,7 +69,7 @@ class TabBarController: UITabBarController {
 extension UITabBar {
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
     var sizeThatFits = super.sizeThatFits(size)
-    sizeThatFits.height = 50 // 원하는 길이
+    sizeThatFits.height = 100 // 원하는 길이
     return sizeThatFits
    }
 }
