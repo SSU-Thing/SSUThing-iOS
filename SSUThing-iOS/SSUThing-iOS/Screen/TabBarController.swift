@@ -66,6 +66,7 @@ class TabBarController: UITabBarController {
     
 }
 
+//TabBar background size
 extension UITabBar {
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
     var sizeThatFits = super.sizeThatFits(size)
