@@ -17,6 +17,7 @@
 		7B3F7776298AFE9100D24394 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F7775298AFE9100D24394 /* TabBarController.swift */; };
 		7B3F7778298AFF4700D24394 /* MyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F7777298AFF4700D24394 /* MyListViewController.swift */; };
 		7B3F777A298B008800D24394 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F7779298B008800D24394 /* MyPageViewController.swift */; };
+		7B962679298BF37F004F34A3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962678298BF37F004F34A3 /* UIViewController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		7B3F7775298AFE9100D24394 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7B3F7777298AFF4700D24394 /* MyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewController.swift; sourceTree = "<group>"; };
 		7B3F7779298B008800D24394 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		7B962678298BF37F004F34A3 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				7B3F7773298AF5E600D24394 /* UIColor+.swift */,
+				7B962678298BF37F004F34A3 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			files = (
 				7B3F7778298AFF4700D24394 /* MyListViewController.swift in Sources */,
 				7B3F7758298A64FC00D24394 /* HomeViewController.swift in Sources */,
+				7B962679298BF37F004F34A3 /* UIViewController+.swift in Sources */,
 				7B3F777A298B008800D24394 /* MyPageViewController.swift in Sources */,
 				7B3F7774298AF5E600D24394 /* UIColor+.swift in Sources */,
 				7B3F7754298A64FC00D24394 /* AppDelegate.swift in Sources */,
