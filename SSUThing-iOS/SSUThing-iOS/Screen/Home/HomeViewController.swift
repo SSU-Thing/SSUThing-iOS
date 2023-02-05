@@ -10,6 +10,22 @@ import SnapKit
 
 class HomeViewController : UIViewController {
     
+    //rightBarButtonItem _ UIMenu
+    lazy var menu : UIMenu = {
+        
+        let notice = UIAction(title: "실시간 공지 사항",
+                              image: UIImage(systemName: "bell"),
+                              handler: {_ in print("notice!")})
+        
+        let menu = UIMenu(title: "title",
+                          image: UIImage(systemName: "bell"),
+                          identifier: nil,
+                          options: .displayInline,
+                          children: [notice])
+        
+       return menu
+    }()
+    
     // WelcomeLabel
     private let UserWelcomeLabel : UILabel = {
         let label = UILabel()
@@ -64,8 +80,19 @@ class HomeViewController : UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
+        setNavigationController()
         configureUI()
         
+    }
+    
+    private func setNavigationController() {
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "",
+                                                            image: UIImage(systemName: "ellipsis.circle"),
+                                                            primaryAction: nil,
+                                                            menu: menu)
     }
     
     private func configureUI() {
