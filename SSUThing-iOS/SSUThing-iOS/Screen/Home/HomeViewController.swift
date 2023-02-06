@@ -10,7 +10,26 @@ import SnapKit
 
 class HomeViewController : UIViewController {
     
-    var UserWelcomeLabel : UILabel = {
+    //rightBarButtonItem _ UIMenu
+    
+    lazy var menuItems: [UIAction] = {
+        return [
+            UIAction(title: "실시간 공지 사항", image: UIImage(systemName: "bell"),handler: {_ in self.touchNoticeBtnEvent()})
+        ]
+    }()
+    
+    lazy var menu : UIMenu = {
+        
+        let menu = UIMenu(title: "title",
+                          image: UIImage(systemName: "bell"),
+                          identifier: nil,
+                          options: .displayInline,
+                          children: menuItems)
+       return menu
+    }()
+    
+    // WelcomeLabel
+    private let UserWelcomeLabel : UILabel = {
         let label = UILabel()
         label.text = "김동현님\nSSUThing에 오신걸 환영해요!"
         label.numberOfLines = 2
@@ -19,159 +38,129 @@ class HomeViewController : UIViewController {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
-    
-    var PatrolButton : UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "patrol"), for: .normal)
-        btn.backgroundColor = .white
-        btn.layer.cornerRadius = 10
-        return btn
+
+    // Select Date
+    private let RentalStartDateLabel : UILabel = {
+        let label = UILabel()
+        label.text = "빌릴 날짜 : "
+        return label
     }()
-    
-    var BookButton : UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "book"), for: .normal)
-        btn.backgroundColor = .white
-        btn.layer.cornerRadius = 10
-        return btn
+
+    private let RentalEndDateLabel : UILabel = {
+        let label = UILabel()
+        label.text = "반납 날짜 : "
+        return label
     }()
+
+    private let startDatePicker = UIDatePicker()
+    private let endDatePicker = UIDatePicker()
     
-    var GameControllerButton : UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "gamecontroller"), for: .normal)
-        btn.backgroundColor = .white
-        btn.layer.cornerRadius = 10
-        return btn
-    }()
-    
-    var EventButton : UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "event"), for: .normal)
-        btn.backgroundColor = .white
-        btn.layer.cornerRadius = 10
-        return btn
-    }()
-    
-    //StackView
-    lazy var FirstLineCategoryStackView : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [PatrolButton, BookButton])
+
+    // Select Date _ StackView
+    lazy var RentalStartStackView : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [RentalStartDateLabel,startDatePicker])
         stackView.axis = .horizontal
-        stackView.backgroundColor = .lightGray
-        stackView.spacing = 25
-        stackView.alignment = .leading
         return stackView
     }()
-    
-    lazy var SecondLineCategoryStackView : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [GameControllerButton, EventButton])
+
+    lazy var RentalEndStackView : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [RentalEndDateLabel,endDatePicker])
         stackView.axis = .horizontal
-        stackView.backgroundColor = .lightGray
-        stackView.spacing = 25
-        stackView.alignment = .leading
         return stackView
     }()
-    
-    lazy var CategoryStackView : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [FirstLineCategoryStackView, SecondLineCategoryStackView])
+
+    lazy var SelectDateStackView : UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [RentalStartStackView,RentalEndStackView])
         stackView.axis = .vertical
-        stackView.spacing = 25
-        stackView.backgroundColor = .yellow
+        stackView.spacing = 10
         return stackView
     }()
-    
-    lazy var mainView : UIView = {
-        let s = UIView()
-        s.backgroundColor = .orange
-        return s
-    }()
-    var CurrentRentalList : UIView = {
-       let cu = UIView()
-        cu.backgroundColor = .green
-        return cu
-    }()
-    
-    lazy var WholeStackView : UIView = {
-        let w = UIView()
-        w.backgroundColor = .white
-        return w
-    }()
-    
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .
+        view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
+        setNavigationController()
+        configureUI()
+        
+    }
+    
+    private func setNavigationController() {
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "",
+                                                            image: UIImage(systemName: "ellipsis.circle"),
+                                                            primaryAction: nil,
+                                                            menu: menu)
+    }
+    
+    private func configureUI() {
         setViewHierarchy()
         setConstrains()
+        setCalenderStyle(startDatePicker)
+        setCalenderStyle(endDatePicker)
     }
+    
     
     func setViewHierarchy(){
         view.addSubview(UserWelcomeLabel)
-//        view.addSubview(WholeStackView)
-//        view.addSubview(CurrentRentalList)
-//        view.addSubview(CategoryStackView)
-//        view.addSubview(CurrentRentalList)
-//        view.addSubview(BookButton)
-//        view.addSubview(GameControllerButton)
-//        view.addSubview(EventButton)
-
+        view.addSubview(SelectDateStackView)
     }
     
     func setConstrains(){
         
-//        WholeStackView.snp.makeConstraints { make in
-//            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 80, left: 25, bottom: 110, right: 25))
-//        }
-        
         UserWelcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().offset(25)
-            make.trailing.equalToSuperview().offset(-90)
-            make.height.equalTo(54)
         }
-        
-//        mainView.snp.makeConstraints { make in
-//            make.top
-//        }
-        
-        
+        SelectDateStackView.snp.makeConstraints { make in
+            make.top.equalTo(UserWelcomeLabel.snp.bottom).offset(30)
+            make.leading.equalToSuperview().offset(25)
 
-//        CategoryStackView.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(25)
-//            make.trailing.equalToSuperview().offset(-25)
-//            make.centerX.equalToSuperview()
-//        }
+        }
+    }
+    
+    @objc
+    func touchNoticeBtnEvent() {
+        let noticeVC = RealTimeNoticeController()
+        navigationController?.pushViewController(noticeVC, animated: true)
+    }
+    
+    
+    private func setCalenderStyle(_ targetDate: UIDatePicker) {
+        targetDate.preferredDatePickerStyle = .compact
+        targetDate.datePickerMode = .dateAndTime
+        targetDate.locale = Locale(identifier: "ko-KR")
+        targetDate.timeZone = .autoupdatingCurrent
         
-//        CurrentRentalList.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(25)
-//            make.trailing.equalToSuperview().offset(-25)
-//            make.centerX.equalToSuperview()
-//            make.height.equalTo(169)
-//
-//        }
-//
-//        PatrolButton.snp.makeConstraints { make in
-//            make.top.equalTo(UserWelcomeLabel).offset(26)
-//            make.top.equalToSuperview().offset(100)
-//            make.leading.equalToSuperview().offset(25)
-//        }
+        // 분 단위 설정이 30분 간격
+        targetDate.minuteInterval = 30
         
-//        BookButton.snp.makeConstraints { make in
-//            make.leading.equalTo(PatrolButton.snp.trailing).offset(25)
-//            make.trailing.equalToSuperview().offset(-25)
-//
-//        }
-//        GameControllerButton.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(25)
-//            make.top.equalTo(PatrolButton.snp.bottom).offset(25)
-//        }
-//        EventButton.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview().offset(-25)
-//            make.top.equalTo(BookButton.snp.bottom).offset(25)
-//        }
-//
-        
+        // 임시 날짜 비활성화
+        var components = DateComponents()
+        components.day = 10
+        let maxDate = Calendar.autoupdatingCurrent.date(byAdding: components, to: Date())
+        components.day = -10
+        let minDate = Calendar.autoupdatingCurrent.date(byAdding: components, to: Date())
+
+        targetDate.maximumDate = maxDate
+        targetDate.minimumDate = minDate
+
+
+        targetDate.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
+    }
+    
+    // MARK: - Selectors
+    @objc
+    private func handleDatePicker(_ sender: UIDatePicker) {
+        print(sender.date)
     }
 }
+
+
 
 
 // MARK: - PreView
@@ -185,28 +174,3 @@ struct PreView: PreviewProvider {
     }
 }
 #endif
-
-//#if DEBUG
-//import SwiftUI
-//struct HomeViewControllerRepresentable: UIViewControllerRepresentable {
-//
-//func updateUIViewController(_ uiView: UIViewController,context: Context) {
-//        // leave this empty
-//}
-//@available(iOS 13.0.0, *)
-//func makeUIViewController(context: Context) -> UIViewController{
-//    HomeViewController()
-//    }
-//}
-//@available(iOS 13.0, *)
-//struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            HomeViewControllerRepresentable()
-//                .ignoresSafeArea()
-//                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-//        }
-//
-//    }
-//} #endif
