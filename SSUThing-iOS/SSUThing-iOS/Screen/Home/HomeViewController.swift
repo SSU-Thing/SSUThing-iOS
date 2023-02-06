@@ -81,6 +81,19 @@ class HomeViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        // Set rootViewController
+        let mainViewController = HomeViewController()
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        guard let delegate = sceneDelegate else {
+            // 에러 알림
+            showUnknownErrorAlert()
+            return
+        }
+        delegate.window?.rootViewController = navigationController
+        
+        
         // Do any additional setup after loading the view.
         setNavigationController()
         configureUI()
