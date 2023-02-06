@@ -11,18 +11,20 @@ import SnapKit
 class HomeViewController : UIViewController {
     
     //rightBarButtonItem _ UIMenu
+    
+    lazy var menuItems: [UIAction] = {
+        return [
+            UIAction(title: "실시간 공지 사항", image: UIImage(systemName: "bell"),handler: {_ in self.touchNoticeBtnEvent()})
+        ]
+    }()
+    
     lazy var menu : UIMenu = {
-        
-        let notice = UIAction(title: "실시간 공지 사항",
-                              image: UIImage(systemName: "bell"),
-                              handler: {_ in print("notice!")})
         
         let menu = UIMenu(title: "title",
                           image: UIImage(systemName: "bell"),
                           identifier: nil,
                           options: .displayInline,
-                          children: [notice])
-        
+                          children: menuItems)
        return menu
     }()
     
@@ -120,6 +122,13 @@ class HomeViewController : UIViewController {
 
         }
     }
+    
+    @objc
+    func touchNoticeBtnEvent() {
+        let noticeVC = RealTimeNoticeController()
+        navigationController?.pushViewController(noticeVC, animated: true)
+    }
+    
     
     private func setCalenderStyle(_ targetDate: UIDatePicker) {
         targetDate.preferredDatePickerStyle = .compact
