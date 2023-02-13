@@ -1,9 +1,9 @@
 ---
 name: SSU Thing issue template
 about: SSU Thing 이슈 템플릿입니다
-title: '[Feat] 작업 내용'
-labels: ''
-assignees: ''
+title: "[Feat] 작업 내용"
+labels: Setting
+assignees: CJiu01
 
 ---
 
