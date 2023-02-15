@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    var loginBtn : UIButton = {
+    lazy var loginBtn : UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -211,6 +211,8 @@ class LoginViewController: UIViewController {
         let nextVC = TabBarController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    
 
 }
 

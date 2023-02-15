@@ -10,15 +10,18 @@ import SnapKit
 
 class TabBarController: UITabBarController {
     
-    let homeVC = HomeViewController()
-    let mylistVC = MyListViewController()
+    let homeVC = HomeVC()
+    let mylistVC = ListVC()
     let mypageVC = MyPageViewController()
     
+    
+
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         view.backgroundColor = UIColor.customColor(.mainbackgroundcolor)
+//        self.navigationItem.hidesBackButton = true
         mainTabBar()
         
     }
